@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.stacked-name {
+  position: relative;
+  font-weight: 900;
+  font-size: 120px;
+  line-height: 1;
+}
+
+.stacked-name::before,
+.stacked-name::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #cfcfcf;
+  z-index: -1;
+}
+
+.stacked-name::before {
+  transform: translateX(6px);
+}
+
+.stacked-name::after {
+  transform: translateX(12px);
+}
