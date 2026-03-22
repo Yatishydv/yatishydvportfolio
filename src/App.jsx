@@ -1,11 +1,17 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Education from "./components/Education";
+import Skills from "./components/Skills";
 import Projects from "./components/Projects";
+import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
+import ScrollProgress from "./components/ScrollProgress";
+import ResumeModal from "./components/ResumeModal";
 
 function App() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   useEffect(() => {
     // Always start from top on refresh
@@ -14,12 +20,23 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-[#f5f5f5] text-black min-h-screen overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <About />
+    <div className="bg-white text-slate-900 min-h-screen overflow-x-hidden transition-colors duration-500 selection:bg-rose-500/30">
+      <ScrollProgress />
+      <Navbar 
+        openResume={() => setIsResumeOpen(true)} 
+      />
+      <Hero openResume={() => setIsResumeOpen(true)} />
+      <About openResume={() => setIsResumeOpen(true)} />
+      <Education />
+      <Skills />
       <Projects />
+      <Certifications />
       <Contact />
+
+      <ResumeModal 
+        isOpen={isResumeOpen} 
+        onClose={() => setIsResumeOpen(false)} 
+      />
     </div>
   );
 }
