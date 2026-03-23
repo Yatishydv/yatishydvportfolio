@@ -55,7 +55,10 @@ const Terminal = () => {
     const newHistory = [...history, { type: "user", content: input }];
 
     if (cmd === "clear") {
-      setHistory([]);
+      setHistory([
+        { type: "system", content: "Yatish-OS v1.0.4 loaded successfully." },
+        { type: "system", content: "Type 'help' to see available commands." },
+      ]);
     } else if (commands[cmd]) {
       newHistory.push({ type: "bot", content: commands[cmd] });
       setHistory(newHistory);
