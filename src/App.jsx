@@ -9,6 +9,7 @@ import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import ScrollProgress from "./components/ScrollProgress";
 import ResumeModal from "./components/ResumeModal";
+import HiddenSEO from "./components/HiddenSEO";
 
 function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -32,6 +33,8 @@ function App() {
       <Projects />
       <Certifications />
       <Contact />
+
+      <HiddenSEO />
 
       <ResumeModal 
         isOpen={isResumeOpen} 

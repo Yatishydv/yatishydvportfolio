@@ -297,10 +297,12 @@ function Certifications() {
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
       
       <div className="max-w-7xl mx-auto relative">
-        {/* Background Section Title */}
-        <h1 className="absolute text-[80px] sm:text-[110px] md:text-[120px] lg:text-[150px] font-black text-slate-100 top-28 left-10 md:left-4 pointer-events-none transition-all duration-700 uppercase select-none leading-none z-0">
+        {/* Background Section Title (aria-hidden to avoid multiple H1s) */}
+        <div
+            aria-hidden="true"
+            className="absolute text-[80px] sm:text-[110px] md:text-[120px] lg:text-[150px] font-black text-slate-100 top-28 left-10 md:left-4 pointer-events-none transition-all duration-700 uppercase select-none leading-none z-0">
             CERTIFICATES
-        </h1>
+        </div>
 
         <div className="relative z-10 pt-10">
             <div className="max-w-xl mb-24">

@@ -124,7 +124,8 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
         <div className="relative aspect-video overflow-hidden bg-slate-100 shrink-0">
           <motion.img 
             src={project.image} 
-            alt={project.title}
+            alt={`Yatish Yadav Portfolio Project: ${project.title} - Full Stack Developer Showcase`}
+            loading="lazy"
             className="w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 pointer-events-none opacity-5 bg-[radial-gradient(circle,transparent_20%,#000_100%)]" />
@@ -278,9 +279,11 @@ const Projects = () => {
   return (
     <section id="projects" className="relative px-6 md:px-16 pt-20 pb-24 bg-white overflow-hidden perspective-2000">
       <div className="max-w-7xl mx-auto relative pt-0">
-        <h1 className="absolute text-[90px] sm:text-[130px] md:text-[160px] lg:text-[200px] font-black text-slate-100 top-0 left-0 md:-left-8 lg:-left-14 pointer-events-none transition-all duration-700 uppercase select-none leading-none z-0">
+        <div
+            aria-hidden="true"
+            className="absolute text-[90px] sm:text-[130px] md:text-[160px] lg:text-[200px] font-black text-slate-100 top-0 left-0 md:-left-8 lg:-left-14 pointer-events-none transition-all duration-700 uppercase select-none leading-none z-0">
             PROJECTS
-        </h1>
+        </div>
 
         <div className="relative z-10">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20">

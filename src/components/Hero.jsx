@@ -103,12 +103,12 @@ function Hero({ openResume }) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <h1
+                <div
                   className="text-[70px] sm:text-[90px] md:text-[110px] lg:text-[130px] font-black leading-[0.85] tracking-tighter text-transparent font-secondary"
                   style={{ WebkitTextStroke: '2px rgba(100, 100, 100, 0.15)' }}
                 >
                   KUMAR
-                </h1>
+                </div>
               </motion.div>
             </div>
 
@@ -146,8 +146,10 @@ function Hero({ openResume }) {
                   </div>
 
                   <div className="space-y-4">
+                    {/* Hidden SEO Keywords Section (sr-only hides from users but keeps for bots) */}
+                    <h3 className="sr-only">Yatish Yadav Portfolio - Full Stack React Developer, MERN Developer India, Freelance Developer</h3>
                     <p className="text-slate-600 font-sans text-[18px] sm:text-[20px] leading-relaxed">
-                      A Full Stack Dev who builds <span className="text-slate-950 font-black">MERN apps</span> and treats <span className="text-rose-500 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-8">documentation</span> like a TOS agreement—I just skip to the end. I specialize in turning complex problems into "just one more fix" and coffee into <span className="text-indigo-500 font-bold">4 AM commits</span>.
+                      I am <span className="text-slate-950 font-black">Yatish Kumar</span>, a Full Stack Dev who builds <span className="text-slate-950 font-black">MERN apps</span> and treats <span className="text-rose-500 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-8">documentation</span> like a TOS agreement—I just skip to the end. I specialize in turning complex problems into "just one more fix" and coffee into <span className="text-indigo-500 font-bold">4 AM commits</span>.
                     </p>
 
                     <div className="pt-6 flex flex-wrap items-center gap-4 border-t border-slate-200/50">
@@ -216,7 +218,7 @@ function Hero({ openResume }) {
               <div className="p-4 bg-white/40 backdrop-blur-3xl rounded-[48px] shadow-3xl border border-white/60 relative overflow-hidden group">
                 <img
                   src={profile}
-                  alt="Yatish Kumar"
+                  alt="Yatish Yadav - Full Stack React Developer & Programmer Portfolio"
                   className="w-[300px] sm:w-[380px] md:w-[420px] lg:w-[460px]
                              h-[380px] sm:h-[480px] md:h-[540px] lg:h-[580px]
                              object-cover rounded-[36px] transition-all duration-700 shadow-2xl group-hover:scale-[1.02]"

@@ -32,7 +32,7 @@ const VintageProjector = () => {
         <div className="relative mix-blend-multiply">
           <img 
             src={projectorImg} 
-            alt="Vintage Eumig Projector" 
+            alt="Yatish Yadav Portfolio - Technical Stack & Skills Projection System" 
             className="w-full h-auto filter brightness-[1.1] contrast-[1.1]"
             style={{ 
               maskImage: "radial-gradient(circle at center, black 60%, transparent 95%)",
