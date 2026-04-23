@@ -78,7 +78,7 @@ function Navbar({ openResume }) {
             {active === id && (
               <motion.div
                 layoutId="active-pill"
-                className="absolute inset-0 bg-rose-500 rounded-full"
+                className="absolute inset-0 bg-rose-600 rounded-full"
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
@@ -134,7 +134,7 @@ function Navbar({ openResume }) {
                   onClick={() => scrollToSection(id)}
                   className={`w-full py-3 px-6 text-left rounded-2xl text-xs font-extrabold transition-all ${
                     active === id 
-                      ? "bg-rose-500 text-white shadow-lg shadow-rose-500/20" 
+                      ? "bg-rose-600 text-white shadow-lg shadow-rose-600/20" 
                       : "text-slate-800 hover:bg-slate-100"
                   }`}
                 >

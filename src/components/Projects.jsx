@@ -153,7 +153,7 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
 
             <div className="flex flex-wrap gap-2 mb-8">
                 {project.tech.map((t, i) => (
-                  <div key={i} className="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-100 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                  <div key={i} className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-[10px] font-black text-slate-700 uppercase tracking-widest">
                     {t}
                   </div>
                 ))}
@@ -168,7 +168,7 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
               whileTap={{ scale: 0.95 }}
               href={project.github} 
               target="_blank" 
-              className="flex-1 h-12 bg-slate-900 rounded-2xl flex items-center justify-center gap-3 text-white text-[11px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-slate-900/10"
+              className="flex-1 h-12 bg-slate-950 rounded-2xl flex items-center justify-center gap-3 text-white text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-slate-900/10"
             >
               <FaGithub size={16} />
               Code
