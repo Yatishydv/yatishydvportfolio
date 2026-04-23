@@ -161,7 +161,7 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
           </div>
 
           {/* Actions */}
-          <div className={`flex gap-4 mt-auto transition-all duration-700 ${!isActive ? "pointer-events-none opacity-40 grayscale" : "pointer-events-auto opacity-100"}`}>
+          <div className={`flex gap-4 mt-auto transition-all duration-700 ${!isActive ? "pointer-events-none opacity-0 invisible" : "pointer-events-auto opacity-100 visible"}`}>
             <motion.a 
               onClick={(e) => e.stopPropagation()}
               whileHover={{ y: -5, backgroundColor: "#f43f5e" }}

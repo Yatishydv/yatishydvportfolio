@@ -241,7 +241,7 @@ function Hero({ openResume }) {
                   </div>
                   <div>
                     <p className="text-base font-black text-slate-900 leading-tight">Product Architecture</p>
-                    <p className="text-[10px] text-slate-500 font-black tracking-widest uppercase mt-1">Frontend Engineering</p>
+                    <p className="text-[10px] text-slate-700 font-black tracking-widest uppercase mt-1">Frontend Engineering</p>
                   </div>
                 </div>
               </motion.div>
@@ -258,7 +258,7 @@ function Hero({ openResume }) {
                   </div>
                   <div>
                     <p className="text-base font-black text-slate-900 leading-tight">System Design</p>
-                    <p className="text-[10px] text-slate-500 font-black tracking-widest uppercase mt-1">Backend Infrastructure</p>
+                    <p className="text-[10px] text-slate-700 font-black tracking-widest uppercase mt-1">Backend Infrastructure</p>
                   </div>
                 </div>
               </motion.div>
