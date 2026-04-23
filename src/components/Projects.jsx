@@ -319,7 +319,7 @@ const Projects = () => {
                       className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all duration-500 border ${
                       filter === cat 
                       ? "bg-slate-900 border-slate-900 text-white shadow-xl shadow-slate-200" 
-                      : "bg-white border-slate-100 text-slate-400 hover:border-rose-500/50 hover:text-rose-500"
+                      : "bg-white border-slate-100 text-slate-600 font-bold hover:border-rose-500/50 hover:text-rose-500"
                       }`}
                   >
                       {cat}

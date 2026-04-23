@@ -109,6 +109,7 @@ function Contact() {
                 <a 
                   key={i} 
                   href={social.link} 
+                  aria-label={`${social.link.includes('github') ? 'GitHub' : social.link.includes('linkedin') ? 'LinkedIn' : 'Instagram'} Profile`}
                   target="_blank" 
                   rel="noreferrer"
                   className="w-12 h-12 flex items-center justify-center bg-slate-100 rounded-2xl border border-slate-200 text-slate-500 hover:text-white hover:bg-rose-500 hover:border-rose-500 transition-all font-bold"
@@ -125,6 +126,7 @@ function Contact() {
               <input
                 type="text"
                 name="from_name"
+                aria-label="Your Name"
                 value={formData.from_name}
                 onChange={handleChange}
                 placeholder="Your Name"
@@ -137,6 +139,7 @@ function Contact() {
               <input
                 type="email"
                 name="from_email"
+                aria-label="Your Email"
                 value={formData.from_email}
                 onChange={handleChange}
                 placeholder="Your Email"
@@ -148,6 +151,7 @@ function Contact() {
             <div>
               <textarea
                 name="message"
+                aria-label="Message Content"
                 rows="5"
                 value={formData.message}
                 onChange={handleChange}

@@ -85,7 +85,7 @@ function Navbar({ openResume }) {
 
             <span
               className={`relative z-10 ${
-                active === id ? "text-white" : "text-slate-600 hover:text-slate-900"
+                active === id ? "text-white font-black" : "text-slate-600 font-bold hover:text-slate-900"
               }`}
             >
               {(id === "certifications" ? "Certificates" : id).charAt(0).toUpperCase() + (id === "certifications" ? "Certificates" : id).slice(1)}
@@ -132,10 +132,10 @@ function Navbar({ openResume }) {
                 <button
                   key={id}
                   onClick={() => scrollToSection(id)}
-                  className={`w-full py-3 px-6 text-left rounded-2xl text-xs font-bold transition-all ${
+                  className={`w-full py-3 px-6 text-left rounded-2xl text-xs font-extrabold transition-all ${
                     active === id 
                       ? "bg-rose-500 text-white shadow-lg shadow-rose-500/20" 
-                      : "text-slate-600 hover:bg-slate-100"
+                      : "text-slate-800 hover:bg-slate-100"
                   }`}
                 >
                   {(id === "certifications" ? "Certificates" : id).charAt(0).toUpperCase() + (id === "certifications" ? "Certificates" : id).slice(1)}
