@@ -234,13 +234,13 @@ function About({ openResume }) {
               <div className="flex-1 flex flex-col gap-6 justify-center">
                 <img 
                   src="https://github-readme-stats.shion.dev/api?username=Yatishydv&show_icons=true&theme=rose&bg_color=00000000&border_color=00000000&hide_border=true&title_color=f43f5e&icon_color=f43f5e&text_color=94a3b8" 
-                  alt="Yatish Yadav GitHub Statistics - Projects, Contributions and Languages" 
+                  alt="Yatish Kumar GitHub Statistics - Projects, Contributions and Languages" 
                   className="w-full max-w-2xl mx-auto"
                 />
                 <div className="w-full flex justify-center border-t border-slate-50 pt-6">
                   <img 
                     src="https://ghchart.rshah.org/f43f5e/Yatishydv" 
-                    alt="Yatish Yadav GitHub Contribution Heatmap - 365 Days Activity" 
+                    alt="Yatish Kumar GitHub Contribution Heatmap - 365 Days Activity" 
                     className="w-full max-w-3xl opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </div>
@@ -251,7 +251,7 @@ function About({ openResume }) {
             <div className="bg-slate-900 p-8 rounded-[40px] border border-slate-800 flex-1 flex flex-col justify-center items-center text-center group">
                <img 
                  src="https://github-readme-streak-stats.herokuapp.com/?user=Yatishydv&theme=rose&background=00000000&border=00000000&stroke=00000000&ring=f43f5e&fire=f43f5e&currStreakLabel=f43f5e&sideNums=94a3b8&sideLabels=94a3b8&dates=94a3b8"
-                 alt="Yatish Yadav GitHub Coding Streak Statistics"
+                 alt="Yatish Kumar GitHub Coding Streak Statistics"
                  className="w-full max-w-[280px] group-hover:scale-105 transition-transform"
                />
                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-6 italic">Streak Status: Active</p>
@@ -259,7 +259,7 @@ function About({ openResume }) {
             <div className="bg-white p-8 rounded-[40px] shadow-xl border border-slate-100 flex-1 flex items-center justify-center group">
                <img 
                  src="https://github-readme-stats.shion.dev/api/top-langs/?username=Yatishydv&layout=compact&theme=rose&bg_color=00000000&border_color=00000000&hide_border=true&title_color=f43f5e&icon_color=f43f5e&text_color=94a3b8" 
-                 alt="Yatish Yadav Most Used Programming Languages - JavaScript, React, Node.js" 
+                 alt="Yatish Kumar Most Used Programming Languages - JavaScript, React, Node.js" 
                  className="w-full max-w-[260px] group-hover:rotate-2 transition-transform"
                />
             </div>

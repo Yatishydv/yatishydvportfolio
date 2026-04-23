@@ -147,9 +147,9 @@ function Hero({ openResume }) {
 
                   <div className="space-y-4">
                     {/* Hidden SEO Keywords Section (sr-only hides from users but keeps for bots) */}
-                    <h3 className="sr-only">Yatish Yadav Portfolio - Full Stack React Developer, MERN Developer India, Freelance Developer</h3>
+                    <h3 className="sr-only">Yatish Kumar (also known as Yatish Yadav) - Professional Full Stack Developer Portfolio. Expert in React, Node.js, and MERN Stack development. Known as yatishydv.</h3>
                     <p className="text-slate-600 font-sans text-[18px] sm:text-[20px] leading-relaxed">
-                      I am <span className="text-slate-950 font-black">Yatish Kumar</span>, a Full Stack Dev who builds <span className="text-slate-950 font-black">MERN apps</span> and treats <span className="text-rose-500 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-8">documentation</span> like a TOS agreement—I just skip to the end. I specialize in turning complex problems into "just one more fix" and coffee into <span className="text-indigo-500 font-bold">4 AM commits</span>.
+                      I am <span className="text-slate-950 font-black">Yatish Kumar</span>, a Full Stack Developer who builds <span className="text-slate-950 font-black">high-performance web applications</span> and treats <span className="text-rose-500 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-8">documentation</span> like a TOS agreement—I just skip to the end. I specialize in turning complex problems into "just one more fix" and coffee into <span className="text-indigo-500 font-bold">4 AM commits</span>.
                     </p>
 
                     <div className="pt-6 flex flex-wrap items-center gap-4 border-t border-slate-200/50">

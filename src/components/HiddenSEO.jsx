@@ -42,9 +42,9 @@ const HiddenSEO = () => {
       style={{ position: 'absolute', width: '1px', height: '1px', padding: '0', margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: '0' }}
     >
       <section>
-        <h2>Yatish Kumar (Yatish Yadav) Professional Profile & Performance Metadata</h2>
+        <h2>Yatish Kumar - Professional Profile & Technical Performance Metadata</h2>
         <p>
-          This section contains technical metadata for Yatish Kumar, also recognized professionally as Yatish Yadav and online as yatishydv. 
+          This section contains technical metadata for Yatish Kumar (also recognizably associated with the identity Yatish Yadav and online as yatishydv). 
           Yatish is a Full Stack Developer specializing in React.js, Node.js, and the MERN stack.
         </p>
         
