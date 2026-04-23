@@ -26,13 +26,15 @@ function App() {
       <Navbar 
         openResume={() => setIsResumeOpen(true)} 
       />
-      <Hero openResume={() => setIsResumeOpen(true)} />
-      <About openResume={() => setIsResumeOpen(true)} />
-      <Education />
-      <Skills />
-      <Projects />
-      <Certifications />
-      <Contact />
+      <main>
+        <Hero openResume={() => setIsResumeOpen(true)} />
+        <About openResume={() => setIsResumeOpen(true)} />
+        <Education />
+        <Skills />
+        <Projects />
+        <Certifications />
+        <Contact />
+      </main>
 
       <HiddenSEO />
 

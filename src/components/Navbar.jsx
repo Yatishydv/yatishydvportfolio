@@ -109,6 +109,7 @@ function Navbar({ openResume }) {
       <div className="md:hidden absolute right-6 top-8 flex gap-3">
         <button
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close Menu" : "Open Menu"}
           className="w-12 h-12 flex items-center justify-center backdrop-blur-lg rounded-2xl shadow-xl border text-2xl bg-white/90 border-slate-200 text-slate-900"
         >
           {isOpen ? <HiX /> : <HiMenu />}

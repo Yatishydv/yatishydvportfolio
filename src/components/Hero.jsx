@@ -16,16 +16,16 @@ function Hero({ openResume }) {
     <>
       {/* ================= DESKTOP / TABLET SOCIAL BAR ================= */}
       <div className="hidden sm:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-6 z-50 text-slate-400">
-        <motion.a whileHover={{ y: -4, color: "#24292e" }} href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
+        <motion.a aria-label="GitHub Profile" whileHover={{ y: -4, color: "#24292e" }} href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
           <FaGithub />
         </motion.a>
-        <motion.a whileHover={{ y: -4, color: "#0077b5" }} href="https://www.linkedin.com/in/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
+        <motion.a aria-label="LinkedIn Profile" whileHover={{ y: -4, color: "#0077b5" }} href="https://www.linkedin.com/in/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
           <FaLinkedin />
         </motion.a>
-        <motion.a whileHover={{ y: -4, color: "#e1306c" }} href="https://instagram.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
+        <motion.a aria-label="Instagram Profile" whileHover={{ y: -4, color: "#e1306c" }} href="https://instagram.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
           <FaInstagram />
         </motion.a>
-        <motion.a whileHover={{ y: -4, color: "#ea4335" }} href="mailto:yatish0155@gmail.com" className="text-xl transition-colors">
+        <motion.a aria-label="Send Email" whileHover={{ y: -4, color: "#ea4335" }} href="mailto:yatish0155@gmail.com" className="text-xl transition-colors">
           <HiOutlineMail />
         </motion.a>
         <div className="w-[1px] h-20 bg-gradient-to-b from-slate-800 to-transparent"></div>
@@ -33,10 +33,10 @@ function Hero({ openResume }) {
 
       {/* ================= MOBILE SOCIAL BAR ================= */}
       <div className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 backdrop-blur-xl shadow-2xl border px-8 py-4 rounded-full flex gap-8 z-50 transition-colors bg-white/80 border-slate-200 text-slate-600">
-        <a href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900"><FaGithub size={20} /></a>
-        <a href="https://www.linkedin.com/in/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-[#0077b5]"><FaLinkedin size={20} /></a>
-        <a href="https://instagram.com/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-[#e1306c]"><FaInstagram size={20} /></a>
-        <a href="mailto:yatish0155@gmail.com" className="hover:text-[#ea4335]"><HiOutlineMail size={22} /></a>
+        <a aria-label="GitHub Profile" href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900"><FaGithub size={20} /></a>
+        <a aria-label="LinkedIn Profile" href="https://www.linkedin.com/in/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-[#0077b5]"><FaLinkedin size={20} /></a>
+        <a aria-label="Instagram Profile" href="https://instagram.com/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-[#e1306c]"><FaInstagram size={20} /></a>
+        <a aria-label="Send Email" href="mailto:yatish0155@gmail.com" className="hover:text-[#ea4335]"><HiOutlineMail size={22} /></a>
       </div>
 
       {/* ================= HERO SECTION ================= */}
@@ -218,7 +218,10 @@ function Hero({ openResume }) {
               <div className="p-4 bg-white/40 backdrop-blur-3xl rounded-[48px] shadow-3xl border border-white/60 relative overflow-hidden group">
                 <img
                   src={profile}
-                  alt="Yatish Yadav - Full Stack React Developer & Programmer Portfolio"
+                  alt="Yatish Kumar - Full Stack React Developer & Programmer Portfolio"
+                  width="460"
+                  height="580"
+                  loading="eager"
                   className="w-[300px] sm:w-[380px] md:w-[420px] lg:w-[460px]
                              h-[380px] sm:h-[480px] md:h-[540px] lg:h-[580px]
                              object-cover rounded-[36px] transition-all duration-700 shadow-2xl group-hover:scale-[1.02]"

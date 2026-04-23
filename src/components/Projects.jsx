@@ -124,7 +124,9 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
         <div className="relative aspect-video overflow-hidden bg-slate-100 shrink-0">
           <motion.img 
             src={project.image} 
-            alt={`Yatish Yadav Portfolio Project: ${project.title} - Full Stack Developer Showcase`}
+            alt={`Yatish Kumar Portfolio Project: ${project.title} - Full Stack Developer Showcase`}
+            width="1280"
+            height="720"
             loading="lazy"
             className="w-full h-full object-cover object-top"
           />

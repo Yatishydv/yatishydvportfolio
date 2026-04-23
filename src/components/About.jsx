@@ -100,6 +100,7 @@ const Terminal = () => {
           <span className="text-rose-500 mr-2">yatish@portfolio:~$</span>
           <input 
             type="text" 
+            aria-label="Terminal Input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="bg-transparent border-none outline-none text-emerald-400 w-full p-0 m-0"

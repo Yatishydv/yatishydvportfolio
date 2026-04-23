@@ -32,7 +32,9 @@ const VintageProjector = () => {
         <div className="relative mix-blend-multiply">
           <img 
             src={projectorImg} 
-            alt="Yatish Yadav Portfolio - Technical Stack & Skills Projection System" 
+            alt="Yatish Kumar Portfolio - Technical Stack & Skills Projection System" 
+            width="640"
+            height="640"
             className="w-full h-auto filter brightness-[1.1] contrast-[1.1]"
             style={{ 
               maskImage: "radial-gradient(circle at center, black 60%, transparent 95%)",
@@ -376,6 +378,7 @@ function Skills() {
                 {/* Sleek Controls - Re-integrated into 3D Board for perfect perspective */}
                 <div className="absolute bottom-[-36px] left-1/2 -translate-x-1/2 flex gap-10 items-center z-50">
                     <motion.button 
+                      aria-label="Previous Skill Group"
                       whileHover={{ scale: 1.1, backgroundColor: "#fff5f5" }}
                       whileTap={{ scale: 0.9 }}
                       onClick={prevGroup}
@@ -385,6 +388,7 @@ function Skills() {
                     </motion.button>
 
                     <motion.button 
+                      aria-label="Next Skill Group"
                       whileHover={{ scale: 1.1, backgroundColor: "#e11d48" }}
                       whileTap={{ scale: 0.9 }}
                       onClick={nextGroup}
