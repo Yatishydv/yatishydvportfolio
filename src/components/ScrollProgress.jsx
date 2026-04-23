@@ -42,6 +42,7 @@ function ScrollProgress() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
+            aria-label="Scroll to Top"
             className="fixed bottom-8 right-8 w-12 h-12 bg-rose-500 text-white rounded-2xl shadow-2xl z-[60] flex items-center justify-center text-xl hover:bg-rose-400 transition-colors"
           >
             <HiArrowUp />

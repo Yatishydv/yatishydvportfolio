@@ -91,7 +91,7 @@ const Terminal = () => {
         className="p-6 h-[320px] overflow-y-auto custom-scrollbar flex flex-col gap-3"
       >
         {history.map((line, i) => (
-          <div key={i} className={`${line.type === "user" ? "text-emerald-400" : line.type === "system" ? "text-slate-500 italic" : "text-slate-300"}`}>
+          <div key={i} className={`${line.type === "user" ? "text-emerald-400" : line.type === "system" ? "text-slate-400 italic" : "text-slate-300"}`}>
             {line.type === "user" ? <span className="text-rose-500 mr-2">yatish@portfolio:~$</span> : null}
             {line.content}
           </div>
@@ -208,7 +208,7 @@ function About({ openResume }) {
                 <div className="w-12 h-12 bg-rose-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-rose-500/20">📂</div>
                 <div>
                   <h4 className="text-slate-900 font-black text-sm uppercase tracking-tight">Full Dossier</h4>
-                  <p className="text-[10px] text-rose-600 font-bold uppercase tracking-widest">Download Resume</p>
+                  <p className="text-[10px] text-rose-700 font-bold uppercase tracking-widest">Download Resume</p>
                 </div>
               </div>
               <div className="text-rose-500 group-hover:translate-x-2 transition-transform">→</div>
