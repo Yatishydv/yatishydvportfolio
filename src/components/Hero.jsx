@@ -15,7 +15,7 @@ function Hero({ openResume }) {
   return (
     <>
       {/* ================= DESKTOP / TABLET SOCIAL BAR ================= */}
-      <div className="hidden sm:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-6 z-50 text-slate-400">
+      <div className="hidden sm:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-6 z-50 text-slate-600">
         <motion.a aria-label="GitHub Profile" whileHover={{ y: -4, color: "#24292e" }} href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
           <FaGithub />
         </motion.a>

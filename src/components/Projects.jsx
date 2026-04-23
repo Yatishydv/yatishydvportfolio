@@ -140,7 +140,7 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
                <span className="px-3 py-1 rounded-full bg-rose-50 text-[9px] font-black text-rose-500 uppercase tracking-widest border border-rose-100">
                 {project.status}
               </span>
-              <span className="text-[11px] font-mono font-bold text-slate-300 tracking-tighter">{project.version}</span>
+              <span className="text-[11px] font-mono font-bold text-slate-500 tracking-tighter">{project.version}</span>
             </div>
             
             <h3 className="text-2xl font-black text-slate-900 tracking-tighter leading-none mb-4 uppercase">
@@ -161,14 +161,14 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
           </div>
 
           {/* Actions */}
-          <div className={`flex gap-4 mt-auto transition-all duration-700 ${!isActive ? "pointer-events-none opacity-20" : "pointer-events-auto opacity-100"}`}>
+          <div className={`flex gap-4 mt-auto transition-all duration-700 ${!isActive ? "pointer-events-none opacity-40 grayscale" : "pointer-events-auto opacity-100"}`}>
             <motion.a 
               onClick={(e) => e.stopPropagation()}
               whileHover={{ y: -5, backgroundColor: "#f43f5e" }}
               whileTap={{ scale: 0.95 }}
               href={project.github} 
               target="_blank" 
-              className="flex-1 h-12 bg-slate-950 rounded-2xl flex items-center justify-center gap-3 text-white text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-slate-900/10"
+              className="flex-1 h-12 bg-black rounded-2xl flex items-center justify-center gap-3 text-white text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-slate-900/10"
             >
               <FaGithub size={16} />
               Code
