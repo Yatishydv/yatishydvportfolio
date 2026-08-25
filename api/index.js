@@ -1,8 +1,4 @@
-import 'dotenv/config';
 import express from 'express';
-import { resolve, join } from 'path';
-
-// Import all API handlers manually since we are not using a dynamic importer for simplicity
 import authSendOtp from '../server/auth/send-otp.js';
 import authVerifyOtp from '../server/auth/verify-otp.js';
 import authCheck from '../server/auth/check.js';
@@ -29,9 +25,6 @@ app.use(express.json());
 
 // Helper to simulate Vercel serverless request/response signatures
 const wrap = (handler) => async (req, res) => {
-  // Vercel parses cookies, Express doesn't by default (unless cookie-parser is used),
-  // but our API code manually parses `req.headers.cookie` anyway, so it's fine!
-  // Vercel req.query is automatically populated by Express
   try {
     await handler(req, res);
   } catch (err) {
@@ -76,24 +69,4 @@ app.all('/api/admin/stats', wrap(adminStats));
 
 app.all('/api/analytics', wrap(analyticsIndex));
 
-const PORT = 3000;
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Local API server running on http://localhost:${PORT}`);
-  console.log(`The Vite frontend proxy is connected to this port.`);
-});
-
-server.on('error', (e) => {
-  console.error('Server error:', e);
-});
-
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught exception:', err);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
-
-// Force keep-alive
-setInterval(() => {}, 1000 * 60 * 60);
-
+export default app;
