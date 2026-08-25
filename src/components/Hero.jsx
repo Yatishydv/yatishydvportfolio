@@ -1,10 +1,11 @@
-import profile from "../assets/profile.jpg";
+import profileFallback from "../assets/profile.jpg";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram, FaReact, FaNodeJs, FaFileAlt, FaPlay } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { SiTailwindcss, SiMongodb } from "react-icons/si";
+import { trackEvent } from "../utils/analytics";
 
-function Hero({ openResume }) {
+function Hero({ openResume, profile: profileData }) {
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -12,20 +13,29 @@ function Hero({ openResume }) {
     }
   };
 
+  const nameParts = (profileData?.name || "YATISH KUMAR").split(" ");
+  const firstName = nameParts[0]?.toUpperCase() || "YATISH";
+  const lastName = nameParts.slice(1).join(" ")?.toUpperCase() || "KUMAR";
+  
+  const githubLink = profileData?.githubUrl || "https://github.com/yatishydv";
+  const linkedinLink = profileData?.linkedinUrl || "https://www.linkedin.com/in/yatishydv";
+  const instagramLink = profileData?.instagramUrl || "https://instagram.com/yatishydv";
+  const mailtoLink = `mailto:${profileData?.email || "yatish0155@gmail.com"}`;
+
   return (
     <>
       {/* ================= DESKTOP / TABLET SOCIAL BAR ================= */}
       <div className="hidden sm:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-6 z-50 text-slate-600">
-        <motion.a aria-label="GitHub Profile" whileHover={{ y: -4, color: "#24292e" }} href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
+        <motion.a aria-label="GitHub Profile" whileHover={{ y: -4, color: "#24292e" }} href={githubLink} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("social_click", "github")} className="text-xl transition-colors">
           <FaGithub />
         </motion.a>
-        <motion.a aria-label="LinkedIn Profile" whileHover={{ y: -4, color: "#0077b5" }} href="https://www.linkedin.com/in/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
+        <motion.a aria-label="LinkedIn Profile" whileHover={{ y: -4, color: "#0077b5" }} href={linkedinLink} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("social_click", "linkedin")} className="text-xl transition-colors">
           <FaLinkedin />
         </motion.a>
-        <motion.a aria-label="Instagram Profile" whileHover={{ y: -4, color: "#e1306c" }} href="https://instagram.com/yatishydv" target="_blank" rel="noopener noreferrer" className="text-xl transition-colors">
+        <motion.a aria-label="Instagram Profile" whileHover={{ y: -4, color: "#e1306c" }} href={instagramLink} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("social_click", "instagram")} className="text-xl transition-colors">
           <FaInstagram />
         </motion.a>
-        <motion.a aria-label="Send Email" whileHover={{ y: -4, color: "#ea4335" }} href="mailto:yatish0155@gmail.com" className="text-xl transition-colors">
+        <motion.a aria-label="Send Email" whileHover={{ y: -4, color: "#ea4335" }} href={mailtoLink} onClick={() => trackEvent("social_click", "email")} className="text-xl transition-colors">
           <HiOutlineMail />
         </motion.a>
         <div className="w-[1px] h-20 bg-gradient-to-b from-slate-800 to-transparent"></div>
@@ -33,10 +43,10 @@ function Hero({ openResume }) {
 
       {/* ================= MOBILE SOCIAL BAR ================= */}
       <div className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 backdrop-blur-xl shadow-2xl border px-8 py-4 rounded-full flex gap-8 z-50 transition-colors bg-white/80 border-slate-200 text-slate-600">
-        <a aria-label="GitHub Profile" href="https://github.com/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900"><FaGithub size={20} /></a>
-        <a aria-label="LinkedIn Profile" href="https://www.linkedin.com/in/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-[#0077b5]"><FaLinkedin size={20} /></a>
-        <a aria-label="Instagram Profile" href="https://instagram.com/yatishydv" target="_blank" rel="noopener noreferrer" className="hover:text-[#e1306c]"><FaInstagram size={20} /></a>
-        <a aria-label="Send Email" href="mailto:yatish0155@gmail.com" className="hover:text-[#ea4335]"><HiOutlineMail size={22} /></a>
+        <a aria-label="GitHub Profile" href={githubLink} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("social_click", "github")} className="hover:text-slate-900"><FaGithub size={20} /></a>
+        <a aria-label="LinkedIn Profile" href={linkedinLink} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("social_click", "linkedin")} className="hover:text-[#0077b5]"><FaLinkedin size={20} /></a>
+        <a aria-label="Instagram Profile" href={instagramLink} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("social_click", "instagram")} className="hover:text-[#e1306c]"><FaInstagram size={20} /></a>
+        <a aria-label="Send Email" href={mailtoLink} onClick={() => trackEvent("social_click", "email")} className="hover:text-[#ea4335]"><HiOutlineMail size={22} /></a>
       </div>
 
       {/* ================= HERO SECTION ================= */}
@@ -95,7 +105,7 @@ function Hero({ openResume }) {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h1 className="text-[70px] sm:text-[90px] md:text-[110px] lg:text-[130px] font-black leading-[0.85] tracking-tighter text-slate-900 font-secondary">
-                  YATISH
+                  {firstName}
                 </h1>
               </motion.div>
               <motion.div
@@ -107,7 +117,7 @@ function Hero({ openResume }) {
                   className="text-[70px] sm:text-[90px] md:text-[110px] lg:text-[130px] font-black leading-[0.85] tracking-tighter text-transparent font-secondary"
                   style={{ WebkitTextStroke: '2px rgba(100, 100, 100, 0.15)' }}
                 >
-                  KUMAR
+                  {lastName}
                 </div>
               </motion.div>
             </div>
@@ -117,7 +127,7 @@ function Hero({ openResume }) {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }}
                 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-500 via-indigo-500 to-rose-500 bg-clip-text text-transparent tracking-tight font-secondary bg-[length:200%_auto] animate-gradient"
               >
-                Full Stack Developer
+                {profileData?.title || "Full Stack Developer"}
               </motion.h2>
 
               <motion.div
@@ -149,7 +159,11 @@ function Hero({ openResume }) {
                     {/* Hidden SEO Keywords Section (sr-only hides from users but keeps for bots) */}
                     <h3 className="sr-only">Yatish Kumar (also known as Yatish Yadav) - Professional Full Stack Developer Portfolio. Expert in React, Node.js, and MERN Stack development. Known as yatishydv.</h3>
                     <p className="text-slate-600 font-sans text-[18px] sm:text-[20px] leading-relaxed">
-                      I am <span className="text-slate-950 font-black">Yatish Kumar</span>, a Full Stack Developer who builds <span className="text-slate-950 font-black">high-performance web applications</span> and treats <span className="text-rose-500 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-8">documentation</span> like a TOS agreement—I just skip to the end. I specialize in turning complex problems into "just one more fix" and coffee into <span className="text-indigo-500 font-bold">4 AM commits</span>.
+                      {profileData?.bio || (
+                        <>
+                          I am <span className="text-slate-950 font-black">Yatish Kumar</span>, a Full Stack Developer who builds <span className="text-slate-950 font-black">high-performance web applications</span> and treats <span className="text-rose-500 font-bold underline decoration-indigo-500/30 decoration-4 underline-offset-8">documentation</span> like a TOS agreement—I just skip to the end. I specialize in turning complex problems into "just one more fix" and coffee into <span className="text-indigo-500 font-bold">4 AM commits</span>.
+                        </>
+                      )}
                     </p>
 
                     <div className="pt-6 flex flex-wrap items-center gap-4 border-t border-slate-200/50">
@@ -169,7 +183,7 @@ function Hero({ openResume }) {
               <div className="mt-8 flex flex-wrap items-center gap-12">
                 {/* Resumé Button - White Pill with Rose Dot */}
                 <motion.button
-                  onClick={openResume}
+                  onClick={() => { trackEvent("resume_click"); openResume(); }}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-2.5 bg-white text-slate-900 rounded-full font-black text-[10px] tracking-[0.2em] uppercase shadow-xl border border-slate-100 hover:border-rose-500/30 transition-all flex items-center gap-3 group"
@@ -217,11 +231,20 @@ function Hero({ openResume }) {
               {/* Profile Image Container */}
               <div className="p-4 bg-white/40 backdrop-blur-3xl rounded-[48px] shadow-3xl border border-white/60 relative overflow-hidden group">
                 <img
-                  src={profile}
+                  src={
+                    profileData?.profileImageUrl
+                      ? (() => {
+                          const url = profileData.profileImageUrl;
+                          const gdriveMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+                          return gdriveMatch ? `/api/image-proxy?id=${gdriveMatch[1]}` : url;
+                        })()
+                      : profileFallback
+                  }
                   alt="Yatish Kumar - Full Stack React Developer & Programmer Portfolio"
                   width="460"
                   height="580"
                   loading="eager"
+                  style={{ objectPosition: profileData?.profileImagePosition || "center" }}
                   className="w-[300px] sm:w-[380px] md:w-[420px] lg:w-[460px]
                              h-[380px] sm:h-[480px] md:h-[540px] lg:h-[580px]
                              object-cover rounded-[36px] transition-all duration-700 shadow-2xl group-hover:scale-[1.02]"

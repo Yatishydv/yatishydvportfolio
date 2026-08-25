@@ -2,7 +2,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { FaGraduationCap, FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
 
-function Education() {
+function Education({ profile }) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -22,7 +22,7 @@ function Education() {
       institution: "Lovely Professional University",
       degree: "B.Tech in Computer Science Engineering",
       duration: "Aug 2023 – Present",
-      grade: "CGPA: 7.67",
+      grade: `CGPA: ${profile?.cgpa || "7.67"}`,
       location: "Phagwara, Punjab",
       status: "STABLE",
       build: "v4.0.2",

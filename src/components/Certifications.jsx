@@ -4,6 +4,15 @@ import { HiX } from "react-icons/hi";
 import { FaAward, FaExternalLinkAlt, FaCalendarAlt, FaFingerprint, FaShieldAlt, FaInfoCircle } from "react-icons/fa";
 import { SiOracle, SiGooglecloud } from "react-icons/si";
 
+const formatImageUrl = (url) => {
+  if (!url) return '';
+  const gdriveMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+  if (gdriveMatch) {
+    return `/api/image-proxy?id=${gdriveMatch[1]}`;
+  }
+  return url;
+};
+
 // Generated assets
 
 const HolographicFoil = ({ x, y, themeColor }) => {
@@ -219,70 +228,36 @@ const SimpleCertificateModal = ({ cert, onClose }) => {
 
 function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
+  const [certifications, setCertifications] = useState([]);
 
-  const certifications = [
-    { 
-      name: "Oracle Data Platform 2025 Certified Foundations Associate", 
-      issuer: "Oracle University", 
-      image: "/1.png",
-      date: "Mar 2026",
-      id: "ORCL-FND-2025",
-      icon: <SiOracle size={48} />,
-      span: "md:col-span-2",
-      color: "#f80000",
-      gradientFrom: "from-red-500",
-      gradientTo: "to-orange-500",
-      bgClass: "bg-red-50/30"
-    },
-    { 
-      name: "Master Generative AI & Generative AI tools (ChatGPT & more)", 
-      issuer: "Udemy", 
-      image: "/2.png",
-      date: "Aug 2025",
-      id: "UD-GEN-0825",
-      icon: <SiGooglecloud size={48} />,
-      color: "#4285f4",
-      gradientFrom: "from-blue-500",
-      gradientTo: "to-emerald-500",
-      bgClass: "bg-blue-50/30"
-    },
-    { 
-      name: "TCP/IP and Advanced Networking Topics", 
-      issuer: "Coursera", 
-      image: "/3.png",
-      date: "Nov 2024",
-      id: "CR-TCP-1124",
-      icon: <FaAward size={48} />,
-      color: "#0056D2",
-      gradientFrom: "from-blue-600",
-      gradientTo: "to-cyan-500",
-      bgClass: "bg-indigo-50/30"
-    },
-    { 
-      name: "Computer Networking — Bits & Bytes", 
-      issuer: "Coursera", 
-      image: "/4.png",
-      date: "Sep 2024",
-      id: "CR-NET-0924",
-      icon: <FaAward size={32} />,
-      color: "#0056D2",
-      gradientFrom: "from-blue-700",
-      gradientTo: "to-indigo-500",
-      bgClass: "bg-slate-50/30"
-    },
-    { 
-      name: "Hardware and Operating Systems", 
-      issuer: "Coursera", 
-      image: "/5.png",
-      date: "Sep 2024",
-      id: "CR-HW-0924",
-      icon: <FaAward size={32} />,
-      color: "#777BB4",
-      gradientFrom: "from-purple-500",
-      gradientTo: "to-fuchsia-500",
-      bgClass: "bg-purple-50/30"
-    }
+  // Fallback data (used when API isn't set up yet)
+  const FALLBACK_CERTS = [
+    { name: "Oracle Data Platform 2025 Certified Foundations Associate", issuer: "Oracle University", image: "/1.png", date: "Mar 2026", id: "ORCL-FND-2025", icon: <SiOracle size={48} />, span: "md:col-span-2", color: "#f80000", gradientFrom: "from-red-500", gradientTo: "to-orange-500", bgClass: "bg-red-50/30" },
+    { name: "Master Generative AI & Generative AI tools (ChatGPT & more)", issuer: "Udemy", image: "/2.png", date: "Aug 2025", id: "UD-GEN-0825", icon: <SiGooglecloud size={48} />, color: "#4285f4", gradientFrom: "from-blue-500", gradientTo: "to-emerald-500", bgClass: "bg-blue-50/30" },
+    { name: "TCP/IP and Advanced Networking Topics", issuer: "Coursera", image: "/3.png", date: "Nov 2024", id: "CR-TCP-1124", icon: <FaAward size={48} />, color: "#0056D2", gradientFrom: "from-blue-600", gradientTo: "to-cyan-500", bgClass: "bg-indigo-50/30" },
+    { name: "Computer Networking — Bits & Bytes", issuer: "Coursera", image: "/4.png", date: "Sep 2024", id: "CR-NET-0924", icon: <FaAward size={32} />, color: "#0056D2", gradientFrom: "from-blue-700", gradientTo: "to-indigo-500", bgClass: "bg-slate-50/30" },
+    { name: "Hardware and Operating Systems", issuer: "Coursera", image: "/5.png", date: "Sep 2024", id: "CR-HW-0924", icon: <FaAward size={32} />, color: "#777BB4", gradientFrom: "from-purple-500", gradientTo: "to-fuchsia-500", bgClass: "bg-purple-50/30" },
   ];
+
+  useEffect(() => {
+    fetch("/api/certificates")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.certificates && data.certificates.length > 0) {
+          const mapped = data.certificates.map((c) => ({
+            ...c,
+            image: formatImageUrl(c.imageUrl || ""),
+            id: c.credentialId || "",
+            span: c.span || "col-span-1",
+            icon: <FaAward size={40} />,
+          }));
+          setCertifications(mapped);
+        } else {
+          setCertifications(FALLBACK_CERTS);
+        }
+      })
+      .catch(() => setCertifications(FALLBACK_CERTS));
+  }, []);
 
   useEffect(() => {
     if (selectedCert) {

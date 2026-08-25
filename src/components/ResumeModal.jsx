@@ -1,7 +1,18 @@
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiX, HiDownload } from "react-icons/hi";
 
-function ResumeModal({ isOpen, onClose }) {
+function ResumeModal({ isOpen, onClose, profile }) {
+  const resumeUrl = profile?.resumeUrl || "/resume.pdf";
+
+  const previewUrl = useMemo(() => {
+    const gdriveMatch = resumeUrl.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+    if (gdriveMatch) {
+      return `https://drive.google.com/file/d/${gdriveMatch[1]}/preview`;
+    }
+    return resumeUrl.includes('.pdf') ? `${resumeUrl}#view=FitH` : resumeUrl;
+  }, [resumeUrl]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -38,7 +49,9 @@ function ResumeModal({ isOpen, onClose }) {
 
               <div className="flex items-center gap-3">
                 <a
-                  href="/resume.pdf"
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   download
                   className="hidden md:flex items-center gap-2 px-6 py-3 rounded-2xl text-[11px] font-black tracking-widest uppercase transition-all shadow-lg bg-slate-900 text-white hover:bg-rose-500"
                 >
@@ -57,14 +70,16 @@ function ResumeModal({ isOpen, onClose }) {
             {/* PDF Viewer Body */}
             <div className="flex-grow overflow-hidden relative bg-slate-50">
               <iframe
-                src="/resume.pdf#view=FitH"
+                src={previewUrl}
                 className="w-full h-full border-none"
                 title="Resume Preview"
               >
                 <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                   <p className="text-slate-500 font-medium mb-4">Your browser doesn't support PDF previews.</p>
                   <a 
-                    href="/resume.pdf" 
+                    href={resumeUrl} 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     download 
                     className="px-6 py-3 bg-rose-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-rose-500/20"
                   >
@@ -76,7 +91,9 @@ function ResumeModal({ isOpen, onClose }) {
               {/* Mobile Download FAB */}
               <div className="md:hidden absolute bottom-8 right-8">
                 <a
-                  href="/resume.pdf"
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   download
                   className="w-14 h-14 bg-rose-500 text-white rounded-2xl shadow-2xl flex items-center justify-center animate-bounce"
                 >

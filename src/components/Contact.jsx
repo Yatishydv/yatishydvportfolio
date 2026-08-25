@@ -3,8 +3,9 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
+import { trackEvent } from "../utils/analytics";
 
-function Contact() {
+function Contact({ profile }) {
   const [formData, setFormData] = useState({
     from_name: "",
     from_email: "",
@@ -46,6 +47,12 @@ function Contact() {
       });
   };
 
+  const socialLinks = [
+    { name: "GitHub", icon: <FaGithub />, url: profile?.githubUrl || "https://github.com/yatishydv", id: "github" },
+    { name: "LinkedIn", icon: <FaLinkedin />, url: profile?.linkedinUrl || "https://www.linkedin.com/in/yatishydv", id: "linkedin" },
+    { name: "Instagram", icon: <FaInstagram />, url: profile?.instagramUrl || "https://instagram.com/yatishydv", id: "instagram" }
+  ];
+
   return (
     <section
       id="contact"
@@ -80,36 +87,35 @@ function Contact() {
                   <HiOutlineMail className="text-xl group-hover:text-rose-500 transition-colors" />
                 </div>
                 <a
-                  href="mailto:yatish0155@gmail.com"
+                  href={`mailto:${profile?.email || "yatish0155@gmail.com"}`}
                   className="hover:text-rose-500 transition-colors"
                 >
-                  yatish0155@gmail.com
+                  {profile?.email || "yatish0155@gmail.com"}
                 </a>
               </div>
 
-              <div className="flex items-center gap-4 text-slate-600 font-bold group">
-                <div className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-full border border-slate-200 group-hover:bg-rose-500/10 transition-colors">
-                  <span className="text-lg group-hover:text-rose-500 transition-colors">📞</span>
+              {profile?.phone && (
+                <div className="flex items-center gap-4 text-slate-600 font-bold group">
+                  <div className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-full border border-slate-200 group-hover:bg-rose-500/10 transition-colors">
+                    <span className="text-lg group-hover:text-rose-500 transition-colors">📞</span>
+                  </div>
+                  <a
+                    href={`tel:${profile.phone}`}
+                    className="hover:text-rose-500 transition-colors"
+                  >
+                    {profile.phone}
+                  </a>
                 </div>
-                <a
-                  href="tel:+919812101423"
-                  className="hover:text-rose-500 transition-colors"
-                >
-                  +91-9812101423
-                </a>
-              </div>
+              )}
             </div>
 
             <div className="flex gap-5 mt-10">
-              {[
-                { icon: <FaGithub />, link: "https://github.com/yatishydv" },
-                { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/yatishydv" },
-                { icon: <FaInstagram />, link: "https://instagram.com/yatishydv" }
-              ].map((social, i) => (
+              {socialLinks.map((social, i) => (
                 <a 
                   key={i} 
-                  href={social.link} 
-                  aria-label={`${social.link.includes('github') ? 'GitHub' : social.link.includes('linkedin') ? 'LinkedIn' : 'Instagram'} Profile`}
+                  href={social.url} 
+                  onClick={() => trackEvent("social_click", social.id)}
+                  aria-label={`Visit ${social.name}`}
                   target="_blank" 
                   rel="noreferrer"
                   className="w-12 h-12 flex items-center justify-center bg-slate-100 rounded-2xl border border-slate-200 text-slate-500 hover:text-white hover:bg-rose-500 hover:border-rose-500 transition-all font-bold"

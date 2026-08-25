@@ -126,44 +126,72 @@ const VintageProjector = () => {
 
 function Skills() {
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [skillGroups, setSkillGroups] = useState([]);
+  const [loadingSkills, setLoadingSkills] = useState(true);
 
-  const skillGroups = [
-    {
-      category: "Programming Languages",
-      skills: [
-        { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
-        { name: "Python", icon: <FaPython />, color: "#3776AB" },
-        { name: "C / C++", icon: <FaCode />, color: "#00599C" },
-        { name: "Java", icon: <FaJava />, color: "#007396" },
-        { name: "PHP", icon: <FaPhp />, color: "#777BB4" }
-      ]
-    },
-    {
-      category: "Frontend Engineering",
-      skills: [
-        { name: "React.js", icon: <FaReact />, color: "#61DAFB" },
-        { name: "Tailwind", icon: <SiTailwindcss />, color: "#06B6D4" },
-        { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
-        { name: "UI/UX Design", icon: <FaLightbulb />, color: "#10B981" }
-      ]
-    },
-    {
-      category: "Backend & Systems",
-      skills: [
-        { name: "Node.js", icon: <FaNodeJs />, color: "#339933" },
-        { name: "Laravel", icon: <SiLaravel />, color: "#FF2D20" },
-        { name: "Firebase", icon: <SiFirebase />, color: "#FFCA28" },
-        { name: "Database", icon: <FaDatabase />, color: "#4479A1" }
-      ]
-    },
-    {
-      category: "Soft Skills & Focus",
-      skills: [
-        { name: "Leadership", icon: <FaUsers />, color: "#6366F1" },
-        { name: "Critical Thinking", icon: <FaBrain />, color: "#F59E0B" },
-        { name: "Full Stack", icon: <FaGear />, color: "#F43F5E" }
-      ]
-    }
+  // Map icon name strings from API → React components
+  const ICON_MAP = {
+    FaJs: <FaJs />, FaReact: <FaReact />, FaNodeJs: <FaNodeJs />, FaPhp: <FaPhp />,
+    FaPython: <FaPython />, FaJava: <FaJava />, FaCode: <FaCode />, FaHtml5: <FaHtml5 />,
+    FaCss3Alt: <FaCss3Alt />, FaGitAlt: <FaGitAlt />, FaDatabase: <FaDatabase />,
+    FaCloud: <FaCloud />, FaGear: <FaGear />, FaUsers: <FaUsers />, FaBrain: <FaBrain />,
+    FaLightbulb: <FaLightbulb />, FaTerminal: <FaTerminal />,
+    SiTailwindcss: <SiTailwindcss />, SiFirebase: <SiFirebase />, SiMongodb: <SiMongodb />,
+    SiLaravel: <SiLaravel />, SiTypescript: <SiTypescript />,
+  };
+
+  // Fetch skills from CMS API
+  useEffect(() => {
+    fetch("/api/skills")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.skillGroups && data.skillGroups.length > 0) {
+          const mapped = data.skillGroups.map((group) => ({
+            category: group.category,
+            skills: group.skills.map((s) => ({
+              name: s.name,
+              color: s.color || "#f43f5e",
+              icon: ICON_MAP[s.iconName] || <FaCode />,
+            })),
+          }));
+          setSkillGroups(mapped);
+        } else {
+          // Fallback to hardcoded if API returns empty
+          setSkillGroups(FALLBACK_SKILLS);
+        }
+        setLoadingSkills(false);
+      })
+      .catch(() => {
+        setSkillGroups(FALLBACK_SKILLS);
+        setLoadingSkills(false);
+      });
+  }, []);
+
+  const FALLBACK_SKILLS = [
+    { category: "Programming Languages", skills: [
+      { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
+      { name: "Python", icon: <FaPython />, color: "#3776AB" },
+      { name: "C / C++", icon: <FaCode />, color: "#00599C" },
+      { name: "Java", icon: <FaJava />, color: "#007396" },
+      { name: "PHP", icon: <FaPhp />, color: "#777BB4" },
+    ]},
+    { category: "Frontend Engineering", skills: [
+      { name: "React.js", icon: <FaReact />, color: "#61DAFB" },
+      { name: "Tailwind", icon: <SiTailwindcss />, color: "#06B6D4" },
+      { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
+      { name: "UI/UX Design", icon: <FaLightbulb />, color: "#10B981" },
+    ]},
+    { category: "Backend & Systems", skills: [
+      { name: "Node.js", icon: <FaNodeJs />, color: "#339933" },
+      { name: "Laravel", icon: <SiLaravel />, color: "#FF2D20" },
+      { name: "Firebase", icon: <SiFirebase />, color: "#FFCA28" },
+      { name: "Database", icon: <FaDatabase />, color: "#4479A1" },
+    ]},
+    { category: "Soft Skills & Focus", skills: [
+      { name: "Leadership", icon: <FaUsers />, color: "#6366F1" },
+      { name: "Critical Thinking", icon: <FaBrain />, color: "#F59E0B" },
+      { name: "Full Stack", icon: <FaGear />, color: "#F43F5E" },
+    ]},
   ];
 
   const nextGroup = useCallback(() => {
@@ -175,14 +203,15 @@ function Skills() {
   }, [skillGroups.length]);
 
   useEffect(() => {
+    if (loadingSkills || skillGroups.length === 0) return;
     const timer = setInterval(() => {
       nextGroup();
     }, 3000);
 
     return () => clearInterval(timer);
-  }, [nextGroup]);
+  }, [nextGroup, loadingSkills, skillGroups.length]);
 
-  const currentGroup = skillGroups[currentIdx];
+  const currentGroup = skillGroups[currentIdx] || { category: "", skills: [] };
 
   return (
     <section id="skills" className="py-32 px-6 md:px-16 bg-white relative overflow-hidden flex flex-col items-center">

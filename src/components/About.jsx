@@ -30,7 +30,7 @@ const Counter = ({ value, duration = 2 }) => {
   return <span ref={ref}>{count}</span>;
 };
 
-const Terminal = () => {
+const Terminal = ({ profile }) => {
   const [history, setHistory] = useState([
     { type: "system", content: "Yatish-OS v1.0.4 loaded successfully." },
     { type: "system", content: "Type 'help' to see available commands." },
@@ -40,10 +40,10 @@ const Terminal = () => {
 
   const commands = {
     help: "Available commands: whoami, skills, education, clear, contact, coffee",
-    whoami: "Yatish Kumar: A full-stack developer who builds MERN apps and treats documentation like a TOS agreement—I just skip to the end. Currently pursuing B.Tech CSE at LPU.",
+    whoami: `${profile?.name || "Yatish Kumar"}: ${profile?.title || "Full Stack Developer"}. ${profile?.bio || ""}`,
     skills: "Frontend: React, Tailwind, JavaScript | Backend: Node, Express, PHP, Laravel, Firebase | Languages: C, C++, Python, Java",
-    education: "B.Tech CSE @ Lovely Professional University (CGPA: 7.67) | Class 12 @ SBS School (93.8%) | Class 10 @ SBS School (100%)",
-    contact: "Email: yatish0155@gmail.com | GitHub: @Yatishydv | LinkedIn: /in/yatishydv | Phone: +91-9812101423",
+    education: `B.Tech CSE @ Lovely Professional University (CGPA: ${profile?.cgpa || "7.67"}) | Class 12 @ SBS School (93.8%) | Class 10 @ SBS School (100%)`,
+    contact: `Email: ${profile?.email || "yatish0155@gmail.com"} | GitHub: ${profile?.githubUrl || "github.com"} | LinkedIn: ${profile?.linkedinUrl || "linkedin.com"} | Phone: ${profile?.phone || "Not provided"}`,
     coffee: "Error: Coffee not found. Please insert more caffeine to continue coding.",
   };
 
@@ -104,7 +104,6 @@ const Terminal = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="bg-transparent border-none outline-none text-emerald-400 w-full p-0 m-0"
-            autoFocus
           />
         </form>
       </div>
@@ -112,7 +111,10 @@ const Terminal = () => {
   );
 };
 
-function About({ openResume }) {
+function About({ openResume, profile }) {
+  const githubUrl = profile?.githubUrl || "https://github.com/Yatishydv";
+  const githubUsername = githubUrl.split("/").filter(Boolean).pop() || "Yatishydv";
+  
   return (
     <section id="about" className="relative z-20 py-28 px-6 md:px-16 bg-white overflow-hidden">
 
@@ -152,8 +154,8 @@ function About({ openResume }) {
                 Don't just read about me. <span className="text-slate-900 font-bold">Hack into my profile</span> and explore the data directly.
               </p>
             </div>
-            <Terminal />
-          </motion.div>
+              <Terminal profile={profile} />
+            </motion.div>
 
           {/* RIGHT SIDE - Bento Grid */}
           <motion.div
@@ -230,20 +232,20 @@ function About({ openResume }) {
                   <h3 className="text-slate-900 font-black text-xl tracking-tight uppercase">Contribution Pipeline</h3>
                   <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">// Monitoring the github flow</p>
                 </div>
-                <a href="https://github.com/Yatishydv" target="_blank" rel="noreferrer" className="text-[10px] font-black uppercase text-rose-500 hover:underline underline-offset-4 tracking-widest">Git Profile</a>
+                <a href={githubUrl} target="_blank" rel="noreferrer" className="text-[10px] font-black uppercase text-rose-500 hover:underline underline-offset-4 tracking-widest">Git Profile</a>
               </div>
               <div className="flex-1 flex flex-col gap-6 justify-center">
                 <img 
-                  src="https://github-readme-stats.shion.dev/api?username=Yatishydv&show_icons=true&theme=rose&bg_color=00000000&border_color=00000000&hide_border=true&title_color=f43f5e&icon_color=f43f5e&text_color=94a3b8" 
-                  alt="Yatish Kumar GitHub Statistics - Projects, Contributions and Languages" 
+                  src={`https://github-readme-stats.shion.dev/api?username=${githubUsername}&show_icons=true&theme=rose&bg_color=00000000&border_color=00000000&hide_border=true&title_color=f43f5e&icon_color=f43f5e&text_color=94a3b8`} 
+                  alt={`${profile?.name || "Yatish Kumar"} GitHub Statistics`} 
                   width="495"
                   height="195"
                   className="w-full max-w-2xl mx-auto"
                 />
                 <div className="w-full flex justify-center border-t border-slate-50 pt-6">
                   <img 
-                    src="https://ghchart.rshah.org/f43f5e/Yatishydv" 
-                    alt="Yatish Kumar GitHub Contribution Heatmap - 365 Days Activity" 
+                    src={`https://ghchart.rshah.org/f43f5e/${githubUsername}`} 
+                    alt={`${profile?.name || "Yatish Kumar"} GitHub Contribution Heatmap`} 
                     width="800"
                     height="120"
                     className="w-full max-w-3xl opacity-80 hover:opacity-100 transition-opacity"
@@ -255,8 +257,8 @@ function About({ openResume }) {
           <div className="lg:col-span-4 flex flex-col gap-6">
             <div className="bg-slate-900 p-8 rounded-[40px] border border-slate-800 flex-1 flex flex-col justify-center items-center text-center group">
                <img 
-                 src="https://github-readme-streak-stats.herokuapp.com/?user=Yatishydv&theme=rose&background=00000000&border=00000000&stroke=00000000&ring=f43f5e&fire=f43f5e&currStreakLabel=f43f5e&sideNums=94a3b8&sideLabels=94a3b8&dates=94a3b8"
-                 alt="Yatish Kumar GitHub Coding Streak Statistics"
+                 src={`https://streak-stats.demolab.com/?user=${githubUsername}&theme=rose&background=00000000&border=00000000&stroke=00000000&ring=f43f5e&fire=f43f5e&currStreakLabel=f43f5e&sideNums=94a3b8&sideLabels=94a3b8&dates=94a3b8`}
+                 alt={`${profile?.name || "Yatish Kumar"} GitHub Coding Streak Statistics`}
                  width="300"
                  height="180"
                  className="w-full max-w-[280px] group-hover:scale-105 transition-transform"
@@ -265,8 +267,8 @@ function About({ openResume }) {
             </div>
             <div className="bg-white p-8 rounded-[40px] shadow-xl border border-slate-100 flex-1 flex items-center justify-center group">
                <img 
-                 src="https://github-readme-stats.shion.dev/api/top-langs/?username=Yatishydv&layout=compact&theme=rose&bg_color=00000000&border_color=00000000&hide_border=true&title_color=f43f5e&icon_color=f43f5e&text_color=94a3b8" 
-                 alt="Yatish Kumar Most Used Programming Languages - JavaScript, React, Node.js" 
+                 src={`https://github-readme-stats.shion.dev/api/top-langs/?username=${githubUsername}&layout=compact&theme=rose&bg_color=00000000&border_color=00000000&hide_border=true&title_color=f43f5e&icon_color=f43f5e&text_color=94a3b8`} 
+                 alt={`${profile?.name || "Yatish Kumar"} Most Used Programming Languages`} 
                  width="300"
                  height="180"
                  className="w-full max-w-[260px] group-hover:rotate-2 transition-transform"

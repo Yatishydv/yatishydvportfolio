@@ -1,16 +1,17 @@
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaGithub, FaArrowRight, FaCode, FaRocket } from "react-icons/fa6";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import { trackEvent } from "../utils/analytics";
 import { SiJavascript, SiReact, SiFirebase, SiTailwindcss, SiWebrtc, SiSocketdotio, SiNodedotjs, SiExpress, SiPhp, SiMysql, SiMongodb, SiJsonwebtokens, SiLaravel } from "react-icons/si";
 
-// Standardized Project Assets (Stored in public folder)
-const projectAssets = {
-  foodzy: "/foodzy.png",
-  blink: "/blink.png",
-  portfolio: "/portfolio.png",
-  freshmart: "/freshmart.png",
-  colabx: "/colabx.png"
+const formatImageUrl = (url) => {
+  if (!url) return '';
+  const gdriveMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+  if (gdriveMatch) {
+    return `/api/image-proxy?id=${gdriveMatch[1]}`;
+  }
+  return url;
 };
 
 const TechBadge = ({ name }) => {
@@ -163,7 +164,10 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
           {/* Actions */}
           <div className={`flex gap-4 mt-auto transition-all duration-700 ${!isActive ? "pointer-events-none opacity-0 invisible" : "pointer-events-auto opacity-100 visible"}`}>
             <motion.a 
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                trackEvent("project_click", `${project._id || project.title}-github`);
+              }}
               whileHover={{ y: -5, backgroundColor: "#f43f5e" }}
               whileTap={{ scale: 0.95 }}
               href={project.github} 
@@ -175,7 +179,10 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
             </motion.a>
             {project.live !== "#" && (
               <motion.a 
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackEvent("project_click", `${project._id || project.title}-live`);
+                }}
                 whileHover={{ y: -5, borderColor: "#f43f5e", color: "#f43f5e" }}
                 whileTap={{ scale: 0.95 }}
                 href={project.live} 
@@ -196,65 +203,30 @@ const ProjectCard = ({ project, index, activeOffset, onCardClick }) => {
 const Projects = () => {
   const [filter, setFilter] = useState("all");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [allProjects, setAllProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const categories = ["all", "React", "Node.js", "AI", "WebRTC", "PHP"];
 
-  const projects = [
-    {
-      title: "Foodzy — Online Food Ordering Platform",
-      description: "Full-stack platform with AI chatbot (Gemini API) and 3D features using THREE.js. Features 40% engagement boost and responsive cart system.",
-      tech: ["React", "JS", "Firebase", "Tailwind", "THREE.js"],
-      github: "https://github.com/Yatishydv/Foodzy",
-      live: "https://foodzy-eat.vercel.app/",
-      category: "React",
-      status: "PRODUCTION",
-      version: "Nov 2025",
-      image: projectAssets.foodzy,
-    },
-    {
-      title: "Blink — Real-Time Video Chat",
-      description: "Anonymous 1-to-1 video chat app using WebRTC and Socket.IO. Low-latency signaling and privacy-focused design (no login required).",
-      tech: ["WebRTC", "Node.js", "Socket.IO", "Express", "JS"],
-      github: "https://github.com/Yatishydv/Blink-video-chat-app",
-      live: "https://blink-video-chat-app.onrender.com/",
-      category: "WebRTC",
-      status: "STABLE",
-      version: "Jan 2026",
-      image: projectAssets.blink,
-    },
-    {
-      title: "Yatish | Professional Portfolio",
-      description: "Advanced developer portfolio featuring immersive terminal-style UI, 3D carousel, and cinematic skills projection. Optimized for cross-device performance.",
-      tech: ["React", "Framer Motion", "Tailwind", "Vite"],
-      github: "https://github.com/Yatishydv/yatishydvportfolio",
-      live: "https://yatishydvportfolio.vercel.app/",
-      category: "React",
-      status: "LIVE",
-      version: "v1.0.0",
-      image: projectAssets.portfolio,
-    },
-    {
-        title: "FreshMart — MERN Dev",
-        description: "Full-stack inventory system research. Comprehensive exploration of atomic database updates and JWT security layers.",
-        tech: ["React", "Express", "MongoDB", "JWT"],
-        github: "https://github.com/Yatishydv/onlinegrosystem",
-        live: "#",
-        category: "Node.js",
-        status: "STABLE",
-        version: "v3.2.0",
-        image: projectAssets.freshmart,
-    },
-    {
-        title: "ColabX — Entrepreneur Platform",
-        description: "Connecting 300+ entrepreneurs to schemes. Features secure PHP/MySQL login and multi-tenant infrastructure.",
-        tech: ["HTML", "CSS", "JS", "PHP", "MySQL"],
-        github: "https://github.com/Yatishydv/ColabX",
-        live: "#",
-        category: "PHP",
-        status: "LEGACY",
-        version: "Apr 2025",
-        image: projectAssets.colabx,
-    },
-  ];
+  // Fetch projects from CMS API
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((r) => r.json())
+      .then((data) => {
+        const mapped = (data.projects || []).map((p) => ({
+          ...p,
+          // Map API field names to the existing ProjectCard prop names
+          description: p.shortDescription || p.fullDescription || "",
+          github: p.githubUrl || "#",
+          live: p.liveUrl || "#",
+          image: formatImageUrl(p.imageUrl || ""),
+        }));
+        setAllProjects(mapped);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const projects = allProjects;
 
   const filteredProjects = filter === "all" 
     ? projects 
